@@ -16,6 +16,11 @@ class SystemTools():
         for name, nodes in self.LINE_NODES.items():
             self.system.add_line_stations(name, nodes)
 
+    def show_map(self):
+        map = sorted([v for k,v in self.system.map.items()], key=lambda x: (x['name']))
+        for line in map:
+            print "%s : [%s]" % (line['name'], list_2_string(line['stations']))
+
     def show_lines(self):
         print(list_2_string(self.system.get_lines()))
 
