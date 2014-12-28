@@ -40,6 +40,9 @@ class System():
         # 更新 Graph
         self.route_map.update_graph(stations)
 
+    def get_line_stations(self, name):
+        return self.map[self._line_ids[name]]['stations']
+
     # 尋找兩臨近站點所在線路
     def get_station_line(self, station_a, station_b):
         stations = (station_a, station_b)
@@ -48,6 +51,12 @@ class System():
             # if station_a in line['stations'] and station_b in line['stations']:
             if all((n in line['stations'] for n in stations)):
                 return line['name']
+
+    def get_map(self):
+        '''
+        [{'name': 'Line_1', 'stations': ['a', 'b', 'c']}, ...]
+        '''
+        return sorted([v for k, v in self.map.items()], key=lambda x: (x['name']))
 
     def count_transfer(self, stations):
         lines = []

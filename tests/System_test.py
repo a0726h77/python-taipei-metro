@@ -32,6 +32,16 @@ class SimplisticTest(unittest.TestCase):
         self.assertEqual(self.system.get_station_line('YuanShan', 'MinQuanXiLu'), 'DanShui')
         self.assertEqual(self.system.get_station_line('MinQuanXiLu', 'ZhongShanGuoXiao'), 'XinLu')
 
+    def test_get_line_stations(self):
+        self.test_get_station_line()
+        self.assertIsInstance(self.system.get_line_stations('DanShui'), list)
+        self.assertEqual(len(self.system.get_line_stations('DanShui')), 4)
+
+    def test_get_map(self):
+        self.test_get_line_stations()
+        self.assertIsInstance(self.system.get_map(), list)
+        self.assertEqual(len(self.system.get_map()), 2)
+
     def test_count_transfer(self):
         self.test_get_station_line()
         self.assertEqual(self.system.count_transfer(['YuanShan', 'MinQuanXiLu', 'ZhongShanGuoXiao']), 1)

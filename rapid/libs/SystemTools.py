@@ -17,12 +17,14 @@ class SystemTools():
             self.system.add_line_stations(name, nodes)
 
     def show_map(self):
-        map = sorted([v for k,v in self.system.map.items()], key=lambda x: (x['name']))
-        for line in map:
+        for line in self.system.get_map():
             print "%s : [%s]" % (line['name'], list_2_string(line['stations']))
 
     def show_lines(self):
         print(list_2_string(self.system.get_lines()))
+
+    def show_line_stations(self, name):
+        print(list_2_string(self.system.get_line_stations(name)))
 
     def search_routes(self, depart, arrive, lines=5):
         for route in self.system.get_routes(depart, arrive, lines):
