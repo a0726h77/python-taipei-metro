@@ -10,13 +10,22 @@ make install-dependencies
 ./metro 圓山 忠孝復興
 ```
 
-## API
-
 ```
 >>> from rapid.systems import TaipeiMetro
 >>> metro = TaipeiMetro()
 >>> metro.show_map()
 >>> metro.search_routes('圓山', '忠孝復興', 1)
+```
+
+## API
+
+```
+>>> from rapid.systems import TaipeiMetro
+>>> metro = TaipeiMetro()
+>>> metro.system.get_lines()
+>>> metro.system.get_line_stations('淡水信義線')
+>>> metro.system.get_map()
+>>> metro.system.get_routes('圓山', '忠孝復興', 1)
 ```
 
 ## Screenshot
