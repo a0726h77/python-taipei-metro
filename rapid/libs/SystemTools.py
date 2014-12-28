@@ -18,7 +18,7 @@ class SystemTools():
 
     def show_map(self):
         for line in self.system.get_map():
-            print "%s : [%s]" % (line['name'], list_2_string(line['stations']))
+            print("%s : [%s]" % (line['name'], list_2_string(line['stations'])))
 
     def show_lines(self):
         print(list_2_string(self.system.get_lines()))
