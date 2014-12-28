@@ -1,3 +1,9 @@
+## Dependencies
+
+```
+make install-dependencies
+```
+
 ## Usage
 
 ```
