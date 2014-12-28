@@ -5,7 +5,7 @@ import os
 import sys
 import unittest
 
-sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../rapid/lib'))
+sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../rapid/libs'))
 
 from System import System
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from rapid.lib.SystemTools import SystemTools
+from rapid.libs.SystemTools import SystemTools
 
 LINE_NODES = {}
 LINE_NODES['紅線'] = ['豐原', '潭子', '太原', '台中', '大慶', '烏日', '新烏日', '成功', '彰化']
