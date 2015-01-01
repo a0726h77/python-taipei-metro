@@ -14,16 +14,18 @@ if __name__ == '__main__':
     parser.add_argument('depart')
     parser.add_argument('arrive')
     parser.add_argument('--limit', type=int, help='列出筆數', default=5,  required=False)
+    parser.add_argument('--max_transfer', type=int, help='最大轉乘數', required=False)
     parser.add_argument('-l', '--list', dest='list_all', help='列出所有線路與車站', action='store_true', required=False)
     args = parser.parse_args()
 
     depart = args.depart
     arrive = args.arrive
     lines = args.limit
+    max_transfer = args.max_transfer
 
     mod = importlib.import_module('rapid.systems.' + METRO_SYSTEM)
     metro = getattr(mod, METRO_SYSTEM)()
     if args.list_all:
         metro.show_map()
     else:
-        metro.search_routes(depart, arrive, lines)
+        metro.search_routes(depart, arrive, lines, max_transfer)

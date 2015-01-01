@@ -26,6 +26,6 @@ class SystemTools():
     def show_line_stations(self, name):
         print(list_2_string(self.system.get_line_stations(name)))
 
-    def search_routes(self, depart, arrive, lines=5):
-        for route in self.system.get_routes(depart, arrive, lines):
+    def search_routes(self, depart, arrive, lines=5, max_transfer=None):
+        for route in self.system.get_routes(depart, arrive, lines, max_transfer):
             print("經過站數：%2d, 轉乘次數：%d\t%s" % (route['count'], route['transfer'], list_2_string(route['route'])))

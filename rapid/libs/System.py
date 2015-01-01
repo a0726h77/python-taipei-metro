@@ -73,7 +73,7 @@ class System():
         # 扣除出發的線路
         return len(lines) - 1
 
-    def get_routes(self, station_a, station_b, lines=5):
+    def get_routes(self, station_a, station_b, lines=5, max_transfer=None):
         # get all routes
         routes = self.route_map.get_routes(station_a, station_b)
 
@@ -95,6 +95,20 @@ class System():
         path_detail_ordered = sorted(path_detail, key=lambda x: (x['count'], x['transfer']))
 
         # 回傳前幾條路徑
+        return_lines = []
+
         if lines > len(routes):
             lines = len(routes)
-        return path_detail_ordered[0:lines]
+
+        for i in range(0, len(path_detail_ordered)):
+            # 到達回傳筆數
+            if len(return_lines) >= lines:
+                break
+            else:
+                # 若超過設定轉乘數，則不列出
+                if max_transfer and path_detail_ordered[i]['transfer'] > max_transfer:
+                    pass
+                else:
+                    return_lines.append(path_detail_ordered[i])
+
+        return return_lines
