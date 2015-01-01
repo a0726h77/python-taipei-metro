@@ -9,23 +9,35 @@ import rapid.systems
 # print rapid.systems.__all__
 METRO_SYSTEM = 'TaipeiMetro'  # 'TaichungMetro'
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('depart')
-    parser.add_argument('arrive')
-    parser.add_argument('--limit', type=int, help='列出筆數', default=5,  required=False)
-    parser.add_argument('--max_transfer', type=int, help='最大轉乘數', required=False)
-    parser.add_argument('-l', '--list', dest='list_all', help='列出所有線路與車站', action='store_true', required=False)
-    args = parser.parse_args()
+mod = importlib.import_module('rapid.systems.' + METRO_SYSTEM)
+metro = getattr(mod, METRO_SYSTEM)()
 
+
+def list_all(args):
+    metro.show_map()
+
+
+def search(args):
     depart = args.depart
     arrive = args.arrive
     lines = args.limit
     max_transfer = args.max_transfer
 
-    mod = importlib.import_module('rapid.systems.' + METRO_SYSTEM)
-    metro = getattr(mod, METRO_SYSTEM)()
-    if args.list_all:
-        metro.show_map()
-    else:
-        metro.search_routes(depart, arrive, lines, max_transfer)
+    metro.search_routes(depart, arrive, lines, max_transfer)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers()
+
+    subparser = subparsers.add_parser('list', help='列出所有線路與車站')
+    subparser.set_defaults(func=list_all)
+
+    subparser = subparsers.add_parser('search', help='搜尋路線')
+    subparser.add_argument('depart')
+    subparser.add_argument('arrive')
+    subparser.add_argument('--limit', type=int, help='列出筆數', default=5,  required=False)
+    subparser.add_argument('--max_transfer', type=int, help='最大轉乘數', required=False)
+    subparser.set_defaults(func=search)
+
+    args = parser.parse_args()
+    args.func(args)
