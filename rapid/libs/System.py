@@ -112,3 +112,12 @@ class System():
                     return_lines.append(path_detail_ordered[i])
 
         return return_lines
+
+    # 尋找可能之經過路線的所有站點
+    def get_possible_route_stations(self, station_a, station_b, lines=3, max_transfer=2):
+        stations = []
+
+        for route in self.get_routes(station_a, station_b, lines, max_transfer):
+            stations = stations + route['route']
+
+        return list(set(stations))
